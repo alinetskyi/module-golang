@@ -17,6 +17,8 @@ func ConcurrentFrequency(text []string) map[rune]int {
 	new_m := make(map[rune]int)
 	for i := range text {
 		go FrequencyParallel(text[i], c)
+	}
+	for range text {
 		for symbol, count := range <-c {
 			new_m[symbol] += count
 		}
